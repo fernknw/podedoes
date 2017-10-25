@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
     permitted = params[:movie].permit(:title,:rating,:release_date)
     @movie = Movie.create!(permitted)
     flash[:notice] = "#{@movie.title} was successfully created."
-    redirect_to movies_path
+    redirect_to movie_path(@movie)
     # shortcut: permitted = params.require(:movie).permit(:title,:rating,:release_date)
     # rest of code...
     # using permitted instead of params[:movie]
