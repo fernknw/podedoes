@@ -79,3 +79,6 @@ form label {
   color: maroon;
 }
 
+table#movies tr:hover {
+  background: yellow;
+}
