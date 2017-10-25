@@ -1,7 +1,9 @@
 # This file is app/controllers/movies_controller.rb
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.order(:title)
+    #@movies = Movie.order(:title)
+    @movies = Movie.all
+    @movies.sort_by {|movie| movie.title}
   end
   def show
     id = params[:id] # retrieve movie ID from URI route
