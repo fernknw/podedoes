@@ -1,9 +1,7 @@
 # This file is app/controllers/movies_controller.rb
 class MoviesController < ApplicationController
   def index
-    #@movies = Movie.order(:title)
-    @movies = Movie.all
-    @movies.sort_by {|movie| movie.title}
+    @movies = Movie.order(:title)
   end
   def show
     id = params[:id] # retrieve movie ID from URI route
@@ -41,5 +39,12 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-end
+  # add to movies_controller.rb, anywhere inside
+  #  'class MoviesController < ApplicationController':
 
+  def search_tmdb
+    # hardwire to simulate failure
+    flash[:warning] = "'#{params[:search_terms]}' was not found in TMDb."
+    redirect_to movies_path
+  end
+end

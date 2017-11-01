@@ -5,11 +5,26 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
+    %link{ :rel => 'stylesheet', :href => '//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css', :type => 'text/css' }
+    %link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "http://www.mx7.com/i/29a/9NWHgG.png", :rel => "icon", :type => "image/png"}
 
   %body
-    - if flash[:notice]
-      #notice.message= flash[:notice]
-    - elsif flash[:warning]
-      #warning.message= flash[:warning]
-    #main
-      = yield
+  %script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"}
+  %script{ :src => '//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' }
+  
+  - if flash[:notice]
+    #notice.message= flash[:notice]
+  - elsif flash[:warning]
+    #warning.message= flash[:warning]
+  #main
+    = yield
+    
+    %div
+  - if current_user
+    Signed in as
+    = succeed "!" do
+      %strong= current_user.name
+    = link_to "Sign out", signout_path, id: "sign_out"
+  - else
+    = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" , :class => 'btn btn-primary'
